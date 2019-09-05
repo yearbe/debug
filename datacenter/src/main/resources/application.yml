@@ -1,0 +1,36 @@
+# port
+server:
+  port: 8765
+  servlet:
+    contextPath: /datacenter
+
+# database
+spring:
+  database:
+    name: data-center
+    url: jdbc:mysql://192.168.8.134:3306/psm?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+    username: root
+    password: new-password
+    driverClassName: com.mysql.jdbc.Driver
+    # Hikari will use the above plus the following to setup connection pooling
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimumIdle: 1
+      maximumPoolSize: 10
+      autoCommit: true
+      idleTimeout: 30000
+      poolName: DatebookHikariCP
+      maxLifetime: 1800000
+      connectionTimeout: 30000
+      connectionTestQuery: select 1
+
+# mybatis mapper files
+mybatis:
+  mapperLocations: classpath:mapping/*.xml
+
+# logback
+logging:
+  level:
+    root: info
+    com.mingdao: debug
+    file: /logs/datacenter/system.log
