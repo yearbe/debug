@@ -1,5 +1,9 @@
 package com.example.demo;
 
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
+import org.assertj.core.util.DateUtil;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
@@ -28,8 +32,10 @@ class MqttTest {
 	@Test
 	void test() {
 		try {
+			log.info("Mqtt connection: {}", mqttConfiguration.toString());
 			MqttClient mqttClient = getMqttClient();
-			MqttMessage message = new MqttMessage("这是一个测试".getBytes());
+			String date = DateUtil.formatAsDatetime(new Date());
+			MqttMessage message = new MqttMessage(("这是一个测试" + date).getBytes());
 	        MqttTopic mTopic = mqttClient.getTopic(mqttConfiguration.getTopic());
 	        MqttDeliveryToken token = mTopic.publish(message);
 	        token.waitForCompletion();
@@ -37,7 +43,8 @@ class MqttTest {
 	        
 	        mqttClient.subscribe(mqttConfiguration.getTopic());
 	        while(!isSuccess) {}
-		} catch (MqttException e) {
+	        TimeUnit.SECONDS.sleep(10L);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -54,7 +61,7 @@ class MqttTest {
 			
 			@Override
 			public void messageArrived(String topic, MqttMessage message) throws Exception {
-				log.info("messageArrived: {} - {}", topic, message.toString());
+				log.info("消息成功: {} - {}", topic, message.toString());
 				isSuccess = true;
 			}
 			
