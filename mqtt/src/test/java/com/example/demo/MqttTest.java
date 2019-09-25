@@ -34,6 +34,8 @@ class MqttTest {
 		try {
 			log.info("Mqtt connection: {}", mqttConfiguration.toString());
 			MqttClient mqttClient = getMqttClient();
+			mqttClient.subscribe(mqttConfiguration.getTopic());
+			
 			String date = DateUtil.formatAsDatetime(new Date());
 			MqttMessage message = new MqttMessage(("这是一个测试" + date).getBytes());
 	        MqttTopic mTopic = mqttClient.getTopic(mqttConfiguration.getTopic());
@@ -41,9 +43,8 @@ class MqttTest {
 	        token.waitForCompletion();
 	        log.info("消息发送成功");
 	        
-	        mqttClient.subscribe(mqttConfiguration.getTopic());
 	        while(!isSuccess) {}
-	        TimeUnit.SECONDS.sleep(10L);
+	        TimeUnit.SECONDS.sleep(1L);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
