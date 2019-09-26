@@ -1,0 +1,30 @@
+server:
+  port: 2222
+
+spring:
+  application:
+    name: manager
+  # 请求管理页面增加用户名与密码访问（不再显示安全提示），客户端注册的配置也要加上认证的用户名和密码http://showme:123321@localhost:2222/eureka
+  security:
+    user:
+      name: showme
+      password: 123321
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    # 是否将应用注册到注册中心（当前应用为注册中心，所以不需要注册）
+    register-with-eureka: false
+    # 是否从注册中心获取注册信息/检索服务（注册中心的职责就是维护服务实例，所以不需要去检索服务）
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka
+# actuator配置（应用信息监控）
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always

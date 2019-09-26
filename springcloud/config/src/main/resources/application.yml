@@ -1,0 +1,21 @@
+server:
+  port: 3333
+spring:
+  application:
+    name: config
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/yearbe/debug.git
+          search-paths:
+          - /config
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://localhost:2222/eureka
