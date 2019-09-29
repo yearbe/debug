@@ -13,7 +13,6 @@
 
     <modules>
         <module>manager</module>
-        <module>config</module>
         <module>service</module>
         <module>client</module>
     </modules>

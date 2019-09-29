@@ -1,0 +1,16 @@
+server:
+    port: 8000
+
+spring:
+    application:
+        name: eureka-server-cluster
+    security:
+        user:
+            name: debug
+            password: 12321
+eureka:
+    client:
+        register-with-eureka: false
+        fetch-registry: false
+        service-url:
+            defaultZone: http://debug:12321@localhost:8001/eureka,http://debug:12321@localhost:8002/eureka
