@@ -5,7 +5,18 @@ spring:
         name: service-provider-cluster
 eureka:
     instance:
+        hostname: localhost
         instance-id: ${spring.application.name}-${spring.cloud.client.ip-address}:${server.port}
+        metadata-map:
+            # 自定义元数据/配置项（不影响eureka功能，可在eureka提供的rest api中查看）
+            # http://localhost:8000/eureka/apps/service-provider-cluster
+            # 请求Header中增加项 Authorization：Basic ZGVidWc6MTIzMjE=
+            # Basic后面内容为debug:12321的base64格式加密内容
+            say: Hello
     client:
+        healthcheck:
+            # 开启健康检查，并反馈给eureka，eureka会根据健康状态将应用下线
+            # 自定义健康检查只需要继承AbstractHealthIndicator类，实现doHealthCheck方法
+            enabled: true
         service-url:
             defaultZone: http://debug:12321@localhost:8000/eureka,http://debug:12321@localhost:8001/eureka,http://debug:12321@localhost:8002/eureka
