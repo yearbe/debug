@@ -15,6 +15,10 @@ public class EurekaApplication {
 		SpringApplication.run(EurekaApplication.class, args);
 	}
 
+	/**
+	 * 配置spring security拦截请求
+	 * 需要配置中的账号密码请求
+	 */
 	@EnableWebSecurity
 	class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		@Override
