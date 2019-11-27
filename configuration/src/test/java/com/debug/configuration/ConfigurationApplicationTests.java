@@ -1,4 +1,4 @@
-package com.deubg.configuration;
+package com.debug.configuration;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
