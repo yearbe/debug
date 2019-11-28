@@ -82,4 +82,54 @@
     }
     ```
 
-    
+
+
+## React
+
+1. 导入`react`包
+
+   ```
+   npm i react react-dom -S
+   ```
+
+   - `react` 专门用于创建组件和虚拟DOM的，同时组件的生命周期都在这个包中
+   - `react-dom` 专门进行DOM操作的，最主要的应用场景，就是`ReactDOM.render()`
+
+2. 在`index.html`页面中，创建容器
+
+   ```html
+   <div id="app"></div>
+   ```
+
+3. 在`index.js`导入包
+
+   ```javascript
+   import React from 'react'
+   import ReactDOM from 'react-dom'
+   ```
+
+4. 创建虚拟DOM元素
+
+   ```js
+   /*
+    * 创建虚拟DOM元素，<h1 title="Hello, React." id="myApp">Welcome to React study.</h1>
+    * 第一个参数：字符串类型，表示要创建的标签名称
+    * 第二个参数：对象型，表示创建的元素的属性
+    * 第三个参数：子节点
+    */
+   const myApp = React.createElement('h1', {title: 'Hello, React.', id: 'myApp'}, 'Welcome to React study.')
+   ```
+
+5. 渲染
+
+   ```js
+   /*
+    * 渲染虚拟DOM元素
+    * 参数1：表示要渲染的虚拟DOM元素
+    * 参数2：指定容器，需要传入一个容器的DOM对象
+    */
+   ReactDOM.render(myApp, document.getElementById('app'))
+   ```
+
+   
+
