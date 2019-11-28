@@ -169,7 +169,7 @@
      }
      ```
 
-   - 添加`babel-loader`配置项
+   - 在`webpack.config.js`下添加`babel-loader`配置项
 
      ```json
      module: {   // 所有第三方模块的配置规则
