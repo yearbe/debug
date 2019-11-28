@@ -84,7 +84,7 @@
 
 
 
-## React
+## `React`
 
 1. 导入`react`包
 
@@ -133,3 +133,54 @@
 
    
 
+## `JSX`语法
+
+> 什么是`JSX`语法，就是符合`xml`规范的`JS`语法（语法格式要比HTML严谨）
+
+1. 如果启用`JSX`语法
+
+   - 安装`babel`插件
+
+     ```sh
+     # 要使用babel-core，则要使用babel-loader的7.x版本
+     npm i babel-core babel-loader@7 babel-plugin-transform-runtime babel-preset-env babel-preset-stage-0 -D
+     ```
+
+     ```sh
+     # 要使用babel-loader的8.x版本，则要使用@babel/core
+     # webpack 4.x | bebel-loader 8.x | babel 7.x
+     npm i -D babel-loader @babel/core @babel/preset-env webpack
+     # webpack 4.x | babel-loader 7.x | babel 6.x
+     npm i -D babel-loader@7 babel-core babel-preset-env webpack
+     ```
+
+   - 安装能够识别转换`JSX`语法的包
+
+     ```sh
+     npm i babel-preset-react -D
+     ```
+
+   - 添加`.babelrc`配置文件
+
+     ```json
+     {
+     	"presets": ["env", "stage-0", "react"],
+     	"plugins": ["transform-runtime"]
+     }
+     ```
+
+   - 添加`babel-loader`配置项
+
+     ```json
+     module: {   // 所有第三方模块的配置规则
+         rules: [    // 第三方匹配规则
+             { 
+                 test: /\.js|jsx$/, 
+                 use: 'babel-loader', 
+                 exclude: /node_modules/     // 不可缺少该排除项
+             }
+         ]
+     }
+     ```
+
+     

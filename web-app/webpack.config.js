@@ -16,5 +16,15 @@ module.exports = {
     mode: 'development', // development production: 生成生产环境代码，会执行代码压缩
     plugins: [
         htmlPlugin
-    ]
+    ],
+    // webpack 默认只能打包处理.js后缀名的文件，像.vue等文件无法主动处理，需要配置第三方的loader
+    module: {   // 所有第三方模块的配置规则
+        rules: [    // 第三方匹配规则
+            { 
+                test: /\.js|jsx$/, 
+                use: 'babel-loader', 
+                exclude: /node_modules/     // 不可缺少该排除项
+            }
+        ]
+    }
 }
