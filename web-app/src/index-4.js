@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import Show from '@/components/Show'
 
-import BindEvent from '@/components/BindEvent'
+const msg = "我想要一个苹果。"
 
 ReactDOM.render(<div>
-    <BindEvent></BindEvent>
+    <Show msg={msg}></Show>
 </div>, document.getElementById("app"))

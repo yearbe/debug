@@ -183,4 +183,68 @@
      }
      ```
 
-     
+
+
+## `CSS`引入
+
+1. `webpack`安装支持`css`的`loader`
+
+   ```sh
+   npm i style-loader css-loader -D
+   ```
+
+2. `webpack.config.js`下配置模块规则
+
+   ```json
+   {
+       test: /\.css$/,
+       // loader会以从右到左的顺序执行，先执行css-loader，再执行style-loader
+       // css-loader使用参数modules为普通的css启动模块化
+       use: ['style-loader', 'css-loader?modules'] // 打包处理css样式的loader
+   }
+   ```
+
+3. 使用`localIdentName`自定义生成的类名格式，可选参数有：
+
+   - `path` 样式表相对于项目根目录的所在路径
+   - `name`  样式表文件名称
+   - `local` 样式的类名定义名称
+   - `hash:length` 表示32位的hash值
+
+   ```json
+   # css-loader2
+   use: ['style-loader', 'css-loader?modules&localIdentName=[path][name]-[local]-[hash:6]']
+   # css-loader3
+   use: ['style-loader', {
+       loader: 'css-loader',
+       options: {
+           modules: {  // 开启模块化
+               localIdentName: '[path][name]-[local]-[hash:6]' // 配置css选择器生成类名规则
+           }
+       }
+   }]
+   ```
+
+4. 安装字体处理`loader`
+
+   ```sh
+   npm i url-loader file-loader -D
+   ```
+
+5. 增加字体处理配置
+
+   ```json
+   {
+       test: /\.ttf|woff|woff2|eot|svg$/,
+       use: 'url-loader'
+   }
+   ```
+
+6. 为解决引入第三方`css`文件被模块化，项目中的样式文件都使用`.scss`或`.less`文件
+
+   ```sh
+   # 安装sass文件处理loader
+   npm i sass-loader node-sass -D
+   ```
+
+   

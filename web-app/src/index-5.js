@@ -1,8 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-
-import BindEvent from '@/components/BindEvent'
+import CmtList from '@/components/CmtList'
 
 ReactDOM.render(<div>
-    <BindEvent></BindEvent>
+    <CmtList></CmtList>
 </div>, document.getElementById("app"))

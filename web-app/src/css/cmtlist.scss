@@ -1,0 +1,19 @@
+.title {
+    color: red;
+}
+
+/** 
+ * css模块化，只针对 类选择器 和 ID选择器
+ * 无法针对标签选择器
+ */
+/* h1, h4 {
+    font-style: italic;
+} */
+
+/* 
+ * 使用:global标识该样式为全局样式
+ * 使用:local标识为模块化样式
+ */
+:global(.showTitle) {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}

@@ -20,11 +20,46 @@ module.exports = {
     // webpack 默认只能打包处理.js后缀名的文件，像.vue等文件无法主动处理，需要配置第三方的loader
     module: {   // 所有第三方模块的配置规则
         rules: [    // 第三方匹配规则
-            { 
+            {
                 test: /\.js|jsx$/, 
                 use: 'babel-loader', 
                 exclude: /node_modules/     // 不可缺少该排除项
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+                // loader会以从右到左的顺序执行，先执行css-loader，再执行style-loader
+                // css-loader使用参数modules为普通的css启动模块化
+                /* use: ['style-loader', {
+                    loader: 'css-loader',
+                    options: {
+                        modules: {  // 开启模块化
+                            localIdentName: '[path][name]-[local]-[hash:6]' // 配置css选择器生成类名规则
+                        }
+                    }
+                }] */ // 打包处理css样式的loader
+            },
+            {   // 打包处理字体文件的loader
+                test: /\.ttf|woff|woff2|eot|svg$/,
+                use: 'url-loader'
+            },
+            {   // 处理scss(Super CSS)文件的loader
+                test: /\.scss/,
+                use: ['style-loader', {
+                    loader: 'css-loader',
+                    options: {
+                        modules: {  // 开启模块化
+                            localIdentName: '[path][name]-[local]-[hash:6]' // 配置css选择器生成类名规则
+                        }
+                    }
+                }, 'sass-loader']
             }
         ]
+    },
+    resolve: {
+        extensions: ['.js', '.jsx', '.json'],    // 表示这几个文件的后缀名可以省略不写
+        alias: {    // 表示别名
+            '@': path.join(__dirname, './src')  // 将@开头的路径转换为项目根目录下的src文件夹
+        }
     }
 }
