@@ -146,7 +146,7 @@ docker exec -it <container-id> /bin/bash
 
  unpause   恢复一个或多个容器内所有被暂停的进程
 
-\2. 更详细的功能参数配置
+**更详细的功能参数配置**
 
 | 参数                                      | 解释                                                         |
 | ----------------------------------------- | ------------------------------------------------------------ |
@@ -409,3 +409,81 @@ docker top container-name #查看容器内进程
 docker exec container-name touch a.txt #在容器内部运行进程
 
 docker stop container-name #停止容器
+
+
+
+## Docker 安装Mysql 5.7
+
+1. 拉取镜像
+
+```sh
+docker pull mysql:5.7
+```
+
+2. 在/etc下新建my.cnf配置文件，如果有的话先删除原来的，再加入创建新的
+
+```php
+[mysql]
+#设置mysql客户端默认字符集
+default-character-set=utf8
+socket=/var/lib/mysql/mysql.sock
+
+[mysqld]
+#mysql5.7以后的不兼容问题处理
+sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+# Settings user and group are ignored when systemd is used.
+# If you need to run mysqld under a different user or group,
+# customize your systemd unit file for mariadb according to the
+# instructions in http://fedoraproject.org/wiki/Systemd
+#允许最大连接数
+max_connections=200
+#服务端使用的字符集默认为8比特编码的latin1字符集
+character-set-server=utf8
+#创建新表时将使用的默认存储引擎
+default-storage-engine=INNODB
+lower_case_table_names=1
+max_allowed_packet=16M 
+#设置时区
+default-time_zone='+8:00'
+[mysqld_safe]
+log-error=/var/log/mariadb/mariadb.log
+pid-file=/var/run/mariadb/mariadb.pid
+
+#
+# include all files from the config directory
+#
+!includedir /etc/mysql/conf.d/
+!includedir /etc/mysql/mysql.conf.d/
+```
+
+3. 运行
+
+```jsx
+docker run --name="mysql-5.7" -p 3306:3306 --privileged=true -v /usr/local/docker/mysql/logs:/logs -v /usr/local/docker/mysql/data:/var/lib/mysql -v /etc/my.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
+```
+
+--privileged=true 获取临时的selinux的权限
+ -v 宿主机目录挂在到容器的地址，映射
+ -e MYSQL_ROOT_PASSWORD 初始化密码
+
+---
+
+```sh
+# 查询镜像
+docker search mysql
+# 拉取镜像
+docker pull mysql:latest
+# 查看本地镜像
+docker images
+# 运行容器
+docker run -itd --name mysql-test -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql
+# 查看容器
+docker ps
+# 进入容器
+docker exec -it mysql-test bash
+```
+

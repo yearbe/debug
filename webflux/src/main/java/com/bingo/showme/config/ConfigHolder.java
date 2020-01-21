@@ -19,7 +19,7 @@ import java.util.Properties;
  * @since 2020-01-10
  */
 @Slf4j
-@Component
+//@Component
 public class ConfigHolder {
     private Properties properties;
 
