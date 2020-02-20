@@ -3,9 +3,9 @@
         "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
-
+    <!-- mvn mybatis-generator:generate -->
     <!-- 本地数据库驱动程序jar包的全路径 -->
-    <classPathEntry location="C:\Users\Bingo\.m2\repository\com\microsoft\sqlserver\sqljdbc4\4.0\sqljdbc4-4.0.jar"/>
+    <classPathEntry location="~/Documents/projects/debug/mybatis/src/main/resources/libs/sqljdbc4-4.0.jar"/>
 
     <context id="context" targetRuntime="MyBatis3">
         <commentGenerator>
@@ -39,7 +39,7 @@
         </javaClientGenerator>
 
         <!-- 相关表的配置 -->
-        <table tableName="ORG_EXZONE" enableCountByExample="false" enableDeleteByExample="false"
+        <table tableName="QTC_QUALITYMANAGEMENT" enableCountByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false"
                enableUpdateByExample="false"/>
     </context>

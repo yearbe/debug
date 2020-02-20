@@ -33,4 +33,4 @@ logging:
   level:
     root: info
     com.mingdao: debug
-    file: /logs/datacenter/system.log
+  file: /logs/datacenter/system.log

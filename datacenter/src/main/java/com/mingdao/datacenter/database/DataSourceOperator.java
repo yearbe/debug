@@ -20,7 +20,7 @@ public class DataSourceOperator {
 
     /**
      * 查询数据源
-     * @param connection
+     * @param conn
      * @param dataSourceName
      * @return
      */

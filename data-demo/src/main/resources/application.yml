@@ -1,0 +1,16 @@
+server:
+  port: 7878
+logging:
+  level:
+    com.debug.demo: debug
+
+default:
+  datasource:
+    url: jdbc:mysql://192.168.120.133:3306/demo?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+    username: root
+    password: lJXhKvBvvPcvd69regZ//7/PJePabrXgh4cbFJ9EN2wlMxq2bw4KdQ16i3tnQWkL
+    driverClassName: com.mysql.cj.jdbc.Driver
+
+jasypt:
+  encryptor:
+    password: this_is_a_salt_value
