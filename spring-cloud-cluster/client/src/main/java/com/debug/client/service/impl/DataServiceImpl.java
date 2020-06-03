@@ -1,6 +1,7 @@
 package com.debug.client.service.impl;
 
 import com.debug.client.service.DataService;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -19,8 +20,13 @@ public class DataServiceImpl implements DataService {
         this.restTemplate = restTemplate;
     }
 
+    @HystrixCommand(fallbackMethod = "queryFail")
     @Override
     public String query(String name) {
         return restTemplate.getForObject("http://service-provider-cluster/api?param=" + name, String.class);
+    }
+
+    private String queryFail(String name) {
+        return "Error: query [" + name + "] failed.";
     }
 }

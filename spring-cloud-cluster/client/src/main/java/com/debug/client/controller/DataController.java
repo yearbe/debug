@@ -1,6 +1,7 @@
 package com.debug.client.controller;
 
 import com.debug.client.service.DataService;
+import com.debug.client.service.PhoneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,14 +15,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class DataController {
 
     private final DataService dataService;
+    private final PhoneService phoneService;
 
     @Autowired
-    public DataController(DataService dataService) {
+    public DataController(DataService dataService, PhoneService phoneService) {
         this.dataService = dataService;
+        this.phoneService = phoneService;
     }
 
     @RequestMapping("/query")
     public String query(String name) {
         return dataService.query(name);
+    }
+
+    @RequestMapping("/search")
+    public String search(String phone) {
+        return phoneService.search(phone);
     }
 }
